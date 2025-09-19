@@ -1,0 +1,47 @@
+version: '3'
+
+tasks:
+  precommit:
+    desc: Run all checks before committing
+    cmds:
+      - task: fmt
+      - task: test
+
+  fmt:
+    cmds:
+      - echo "🔍 Running go fmt..."
+      - |
+        unformatted=$(go fmt ./...)
+        if [ -n "$unformatted" ]; then
+          echo "❌ The following files are not formatted:"
+          echo "$unformatted"
+          exit 1
+        fi
+
+  test:
+    cmds:
+      - echo "🧪 Running tests..."
+      - go test -v ./...
+
+  commitmsg:
+    desc: Validate commit message format
+    cmds:
+      - |
+        commit_msg_file="{{.CLI_ARGS}}"
+        commit_msg=$(cat "$commit_msg_file")
+
+        # Allowed verbs
+        verbs="Adds|Changes|Runs|Refactors|Removes|Formats|Fixes|Updates|Improves|Renames|Documents|Tests"
+
+        # Pattern: Author | Verb Description
+        pattern="^[A-Za-z0-9_-]+ \| ($verbs)( .+)$"
+
+        if ! echo "$commit_msg" | grep -Eq "$pattern"; then
+          echo "❌ Invalid commit message format."
+          echo "✅ Supported verbs:"
+          echo "   $(echo "$verbs" | tr '|' ' ')"
+          echo
+          echo "   Expected: Author | <Verb> <Description>"
+          echo "   Example:  Sarthak | Adds search query parser"
+          exit 1
+        fi
