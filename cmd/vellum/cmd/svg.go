@@ -21,7 +21,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/blevesearch/vellum"
+	"github.com/gaze-io/vellum"
 	"github.com/spf13/cobra"
 )
 

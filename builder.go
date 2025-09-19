@@ -418,12 +418,13 @@ func outputCat(l, r uint64) uint64 {
 // |    Unfinished Nodes    |      Transfer once         |        Registry      |
 // |(not frozen builderNode)|-----builderNode is ------->| (frozen builderNode) |
 // +------------------------+      marked frozen         +----------------------+
-//              ^                                                     |
-//              |                                                     |
-//              |                                                   Put()
-//              | Get() on        +-------------------+             when
-//              +-new char--------| builderNode Pool  |<-----------evicted
-//                                +-------------------+
+//
+//	^                                                     |
+//	|                                                     |
+//	|                                                   Put()
+//	| Get() on        +-------------------+             when
+//	+-new char--------| builderNode Pool  |<-----------evicted
+//	                  +-------------------+
 type builderNodePool struct {
 	head *builderNode
 }

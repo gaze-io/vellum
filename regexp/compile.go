@@ -20,7 +20,7 @@ import (
 
 	unicode_utf8 "unicode/utf8"
 
-	"github.com/blevesearch/vellum/utf8"
+	"github.com/gaze-io/vellum/utf8"
 )
 
 type compiler struct {

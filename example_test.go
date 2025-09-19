@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/blevesearch/vellum"
+	"github.com/gaze-io/vellum"
 )
 
 func Example() {

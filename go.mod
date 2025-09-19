@@ -1,6 +1,6 @@
-module github.com/blevesearch/vellum
+module github.com/gaze-io/vellum
 
-go 1.21
+go 1.24.4
 
 require (
 	github.com/bits-and-blooms/bitset v1.2.0

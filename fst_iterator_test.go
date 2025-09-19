@@ -19,8 +19,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/blevesearch/vellum/levenshtein"
-	"github.com/blevesearch/vellum/regexp"
+	"github.com/gaze-io/vellum/levenshtein"
+	"github.com/gaze-io/vellum/regexp"
 )
 
 func TestIterator(t *testing.T) {

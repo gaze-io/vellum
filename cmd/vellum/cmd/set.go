@@ -20,7 +20,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/blevesearch/vellum"
+	"github.com/gaze-io/vellum"
 	"github.com/spf13/cobra"
 )
 
