@@ -144,39 +144,11 @@ For additional information, see the references at the bottom of this document.
 
 We've broken out a separate document on the [vellum disk format v1](docs/format.md).
 
-### What if I want to use this on a system that doesn't have mmap?
-
-The mmap library itself is guarded with system/architecture build tags, but we've also added an additional build tag in vellum.  If you'd like to Open() a file based representation of an FST, but not use mmap, you can build the library with the `nommap` build tag.  NOTE: if you do this, the entire FST will be read into memory.
-
 ### Can I use this with Unicode strings?
 
 Yes, however this implementation is only aware of the byte representation you choose.  In order to find matches, you must work with some canonical byte representation of the string.  In the future, some encoding-aware traversals may be possible on top of the lower-level byte transitions.
 
-### How did this library come to be?
-
-In my work on the [Bleve](https://github.com/blevesearch/bleve) project I became aware of the power of the FST for many search-related tasks.  The obvious starting point for such a thing in Go was the [mafsa](https://github.com/smartystreets/mafsa) project.  While working with mafsa I encountered some issues.  First, it did not stream data to disk while building.  Second, it chose to use a rune as the fundamental unit of transition in the FST, but I felt using a byte would be more powerful in the end.  My hope is that higher-level encoding-aware traversals will be possible when necessary.  Finally, as I reported bugs and submitted PRs I learned that the mafsa project was mainly a research project and no longer being maintained.  I wanted to build something that could be used in production.  As the project advanced more and more techniques from the [BurntSushi/fst](https://github.com/BurntSushi/fst) were adapted to our implementation.
-
-### Are there tools to work with vellum files?
-
-Under the cmd/vellum subdirectory, there's a command-line tool which
-features subcommands that can allow you to create, inspect and query
-vellum files.
-
-### How can I generate a state transition diagram from a vellum file?
-
-The vellum command-line tool has a "dot" subcommand that can emit
-graphviz dot output data from an input vellum file.  The dot file can
-in turn be converted into an image using graphviz tools.  Example...
-
-    $ vellum dot myFile.vellum > output.dot
-    $ dot -Tpng output.dot -o output.png
-
 ## Related Work
 
-Much credit goes to two existing projects:
  - [mafsa](https://github.com/smartystreets/mafsa)
  - [BurntSushi/fst](https://github.com/BurntSushi/fst)
-
-Most of the original implementation here started with my digging into the internals of mafsa.  As the implementation progressed, I continued to borrow ideas/approaches from the BurntSushi/fst library as well.
-
-For a great introduction to this topic, please read the blog post [Index 1,600,000,000 Keys with Automata and Rust](http://blog.burntsushi.net/transducers/)
