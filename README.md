@@ -3,6 +3,8 @@
 [![vellumCI](https://github.com/gaze-io/vellum/actions/workflows/build.yml/badge.svg)](https://github.com/gaze-io/vellum/actions/workflows/build.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+#### **IMPORTANT:** The original repository is [here](https://github.com/blevesearch/vellum).
+
 A Go library implementing an FST (finite state transducer) capable of:
   - mapping between keys ([]byte) and a value (uint64)
   - enumerating keys in lexicographic order
